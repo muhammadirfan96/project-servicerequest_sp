@@ -1,0 +1,21 @@
+version: "3.8"
+
+services:
+  limaes:
+    build: .
+    container_name: react-limaes
+    environment:
+      - VIRTUAL_HOST=limaes.local.test
+      - VIRTUAL_PORT=4173
+      - LETSENCRYPT_HOST=limaes.local.test
+      - LETSENCRYPT_EMAIL=muhammadirfan187@outlook.com
+    expose:
+      - "4173"
+    networks:
+      - proxy
+    # depends_on:
+    #   - nginx-proxy
+
+networks:
+  proxy:
+    external: true
