@@ -26,7 +26,7 @@ const ResetPassword = () => {
       dispatch(
         setNotification({
           message: response.data.message,
-          background: "bg-teal-100",
+          background: "bg-green-500",
         }),
       );
 
@@ -51,46 +51,52 @@ const ResetPassword = () => {
   return (
     <>
       {showModal && (
-        <div className="fixed bottom-0 left-0 right-0 top-0 z-10 flex items-center justify-center bg-slate-900 bg-opacity-80">
-          <div className="relative w-[95%] rounded-md bg-white p-2 shadow-md shadow-teal-100 md:w-[80%] lg:w-[50%]">
-            <p className="mb-2 border-b border-teal-700 text-center">
-              Reset password
-            </p>
+        <div className="absolute inset-0 mt-4 flex items-center justify-center bg-gradient-to-br from-blue-300 to-teal-200 px-4 py-12 backdrop-blur-sm">
+          <div className="relative h-fit w-full max-w-md rounded-3xl bg-white p-8 text-center shadow-2xl md:w-[60%] lg:w-[35%]">
+            <div className="mb-6">
+              <h2 className="text-3xl font-bold tracking-tight text-gray-800">
+                Reset Your Password
+              </h2>
+              <p className="mt-2 text-sm text-gray-500">
+                Enter the token and your new password
+              </p>
+            </div>
 
             {errForm && (
-              <div className="mb-2 rounded border border-red-700 p-1 text-xs italic text-red-700">
+              <div className="mb-4 rounded-md border border-red-400 bg-red-50 p-2 text-xs italic text-red-700">
                 {errForm.map((err, index) => (
                   <p key={index}>{err}</p>
                 ))}
               </div>
             )}
-            <form onSubmit={handleSubmit}>
+
+            <form onSubmit={handleSubmit} className="space-y-4">
               <input
                 type="text"
-                placeholder="token"
-                className="mb-1 w-full rounded-md border p-1"
+                placeholder="Token"
+                className="w-full rounded-md border-b-2 border-blue-200 bg-blue-50 p-3 text-gray-800 placeholder-gray-500 outline-none transition-colors duration-200 focus:border-cyan-400"
                 value={resetPasswordToken}
                 onChange={(e) => setResetPasswordToken(e.target.value)}
               />
               <input
                 type="password"
-                placeholder="password"
-                className="mb-1 w-full rounded-md border p-1"
+                placeholder="New Password"
+                className="w-full rounded-md border-b-2 border-blue-200 bg-blue-50 p-3 text-gray-800 placeholder-gray-500 outline-none transition-colors duration-200 focus:border-cyan-400"
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
               />
               <input
                 type="password"
-                placeholder="confirmation"
-                className="mb-1 w-full rounded-md border p-1"
+                placeholder="Confirm New Password"
+                className="w-full rounded-md border-b-2 border-blue-200 bg-blue-50 p-3 text-gray-800 placeholder-gray-500 outline-none transition-colors duration-200 focus:border-cyan-400"
                 value={confPassword}
                 onChange={(e) => setConfPassword(e.target.value)}
               />
               <button
                 type="submit"
-                className="mb-1 w-full rounded-md border bg-teal-300 p-1"
+                className="mt-6 w-full rounded-full bg-gradient-to-r from-blue-500 to-cyan-500 py-3 font-semibold text-white shadow-md transition-all duration-300 hover:from-blue-600 hover:to-cyan-600 focus:outline-none focus:ring-2 focus:ring-blue-400"
               >
-                submit
+                Submit
               </button>
             </form>
           </div>

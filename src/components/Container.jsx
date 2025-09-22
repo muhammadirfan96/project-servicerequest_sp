@@ -6,34 +6,26 @@ import ForgotPassword from "../auth/ForgotPassword.jsx";
 import ActivationUser from "../auth/ActivationUser.jsx";
 import ResetPassword from "../auth/ResetPassword.jsx";
 import { Routes, Route } from "react-router-dom";
-import { useSelector } from "react-redux";
-import Activity from "../page/Activity.jsx";
-import Schedule from "../page/Schedule.jsx";
-import Approval from "../page/Approval.jsx";
+import PunagayaDetection from "../page/punagaya/Detection.jsx";
+import PunagayaPrediction from "../page/punagaya/Prediction.jsx";
+import About from "../page/About.jsx";
+import Contact from "../page/Contact.jsx";
 
 const Container = () => {
-  const sbar = useSelector((state) => state.bar.sidebar);
-  const bbar = useSelector((state) => state.bar.bottombar);
-
   return (
     <>
-      <div
-        className={`${
-          sbar && "md:ml-52"
-        } fixed left-0 right-0 top-0 mx-auto mt-[64px] overflow-x-auto pt-5 md:bottom-0 ${
-          !bbar ? "bottom-20" : "bottom-0"
-        }`}
-      >
+      <div className="fixed bottom-0 left-0 right-0 top-0 mx-auto mt-[64px] overflow-x-auto pt-5">
         <Routes>
           <Route path="/" element={<Home />} />
-          <Route path="/activity" element={<Activity />} />
-          <Route path="/schedule" element={<Schedule />} />
-          <Route path="/approval" element={<Approval />} />
+          <Route path="/punagaya/detection" element={<PunagayaDetection />} />
+          <Route path="/punagaya/prediction" element={<PunagayaPrediction />} />
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
           <Route path="/forgot-password" element={<ForgotPassword />} />
           <Route path="/activation-user/:email" element={<ActivationUser />} />
           <Route path="/reset-password/:email" element={<ResetPassword />} />
+          <Route path="/about" element={<About />} />
+          <Route path="/contact" element={<Contact />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
       </div>

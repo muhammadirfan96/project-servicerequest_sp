@@ -18,14 +18,14 @@ const Logout = () => {
       dispatch(
         setNotification({
           message: response.data?.message,
-          background: "bg-teal-100",
+          background: "bg-green-500",
         }),
       );
       navigate("/");
     } catch (e) {
       const arrError = e.response.data.error.split(",");
       dispatch(
-        setNotification({ message: arrError, background: "bg-red-100" }),
+        setNotification({ message: arrError, background: "bg-amber-500" }),
       );
     }
   };
@@ -35,9 +35,9 @@ const Logout = () => {
       <div>
         <button
           onClick={handleLogout}
-          className="mx-1 rounded bg-red-700 p-1 text-white shadow"
+          className="mx-1 rounded-md bg-gradient-to-r from-blue-500 to-cyan-500 px-4 py-2 text-sm font-medium text-white shadow-md transition-all duration-300 hover:from-blue-600 hover:to-cyan-600 focus:outline-none focus:ring-2 focus:ring-blue-400"
         >
-          logout
+          Logout
         </button>
       </div>
     </>

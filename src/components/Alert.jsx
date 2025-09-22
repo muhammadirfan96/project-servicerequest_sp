@@ -1,4 +1,5 @@
 import { useDispatch, useSelector } from "react-redux";
+import { useEffect } from "react";
 import { setNotification } from "../redux/notificationSlice.js";
 import { setConfirmation } from "../redux/confirmationSlice.js";
 
@@ -11,27 +12,29 @@ const Confirmation = () => {
   return (
     <>
       {confirmation && (
-        <div className="fixed bottom-0 left-0 right-0 top-0 z-20 bg-slate-900 bg-opacity-50">
-          <div className="relative mx-auto mt-20 w-[95%] rounded-md bg-white p-2 shadow-md shadow-teal-100 md:w-[80%] lg:w-[50%]">
-            <p className="mb-2 border-b border-teal-700 text-center text-xs">
+        <div className="fixed inset-0 z-20 flex items-center justify-center bg-slate-900/60 backdrop-blur-sm">
+          <div className="relative w-[95%] rounded-xl bg-white/90 p-6 shadow-2xl md:w-[70%] lg:w-[40%]">
+            <p className="mb-3 border-b border-cyan-500 pb-1 text-center text-base font-semibold text-gray-700">
               Confirmation
             </p>
-            <p className="mb-2 text-center">{confirmation.message}</p>
-            <div className="flex justify-center">
+            <p className="mb-6 text-center text-sm text-gray-600">
+              {confirmation.message}
+            </p>
+            <div className="flex justify-center gap-4">
               <button
                 onClick={() => dispatch(setConfirmation(false))}
-                className="mx-1 rounded bg-red-700 p-1 text-xs text-white"
+                className="rounded-full bg-gradient-to-r from-red-500 to-pink-500 px-5 py-1.5 text-sm font-medium text-white shadow-md transition-all duration-200 hover:from-red-600 hover:to-pink-600"
               >
-                calcel
+                Cancel
               </button>
               <button
                 onClick={() => {
                   confirmation.handleOke();
                   dispatch(setConfirmation(false));
                 }}
-                className="mx-1 rounded bg-green-700 p-1 text-xs text-white"
+                className="rounded-full bg-gradient-to-r from-cyan-500 to-blue-500 px-5 py-1.5 text-sm font-medium text-white shadow-md transition-all duration-200 hover:from-cyan-600 hover:to-blue-600"
               >
-                oke
+                OK
               </button>
             </div>
           </div>
@@ -47,18 +50,25 @@ const Notification = () => {
     (state) => state.notificationAlert.notification,
   );
 
-  if (notification)
-    setTimeout(function () {
-      dispatch(setNotification(false));
-    }, 3000);
+  // Hapus notifikasi otomatis setelah 3 detik
+  useEffect(() => {
+    if (notification) {
+      const timer = setTimeout(() => {
+        dispatch(setNotification(false));
+      }, 3000);
+      return () => clearTimeout(timer);
+    }
+  }, [notification, dispatch]);
 
   return (
     <>
       {notification && (
         <div
-          className={`${notification.background} fixed right-0.5 top-0.5 z-20 mt-1 rounded-md p-1 shadow-md`}
+          className={`${notification.background} fixed left-1/2 top-4 z-50 -translate-x-1/2 rounded-lg px-4 py-2 shadow-lg`}
         >
-          <p className="text-center text-xs">{notification.message}</p>
+          <p className="text-center text-sm font-medium text-white drop-shadow">
+            {notification.message}
+          </p>
         </div>
       )}
     </>

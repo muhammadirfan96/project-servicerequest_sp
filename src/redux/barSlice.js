@@ -3,8 +3,8 @@ import { createSlice } from "@reduxjs/toolkit";
 const barSlice = createSlice({
   name: "bar",
   initialState: {
-    sidebar: true,
-    bottombar: false,
+    sidebar: false,
+    bottombar: true,
   },
   reducers: {
     setSidebar(state) {

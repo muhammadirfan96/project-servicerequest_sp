@@ -1,13 +1,13 @@
 version: "3.8"
 
 services:
-  limaes:
+  seapower:
     build: .
-    container_name: react-limaes
+    container_name: react-seapower
     environment:
-      - VIRTUAL_HOST=limaes.local.test
+      - VIRTUAL_HOST=seapower.plnnusantarapower.co.id
       - VIRTUAL_PORT=4173
-      - LETSENCRYPT_HOST=limaes.local.test
+      - LETSENCRYPT_HOST=seapower.plnnusantarapower.co.id
       - LETSENCRYPT_EMAIL=muhammadirfan187@outlook.com
     expose:
       - "4173"
